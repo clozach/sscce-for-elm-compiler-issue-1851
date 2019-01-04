@@ -1,5 +1,5 @@
-# SSCCE for this error:
-> elm: Map.!: given key is not an element in the map
+# SSCCE for error:
+## elm: Map.!: given key is not an element in the map
 
 I first encountered the "not an element in the map" error while attempting to work with `mdgriffith/elm-style-animation`. Google got me to the [Meta issue](https://github.com/elm/compiler/issues/1851), at which point I decided to try a few different things in hopes of getting some sort of triangulation on the problem. In the end, I explored 4 scenarios with 2 different versions of _Main.elm_:
 
@@ -8,13 +8,38 @@ I first encountered the "not an element in the map" error while attempting to wo
 ```
 git checkout tags/noerror
 ```
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Scenario</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><code>elm reactor</code> (browse to src/Main.elm)</td>
+            <td>✅ No error.</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><code>elm make src/Main.elm</code> then <code>open index.html</code></td>
+            <td>✅ No error.</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Parcel (see below)</td>
+            <td>✅ No error.</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><code>git checkout tags/noerror</code> + paste _Main.elm_ into Ellie (<a href="https://ellie-app.com/4mrN7hymNKja1">demo</a>)</td>
+            <td>✅ No error.</td>
+        </tr>
+    </tbody>
+</table>
 
- | Scenario | Result
--|---------|--------
-1| `elm reactor` (browse to src/Main.elm)                                                                  |  ✅ No error.
-2| `elm make src/Main.elm` then `open index.html`                                                          |  ✅ No error.
-3| Parcel (see below)                                                                                      |  ✅ No error.
-4| Paste _Main.elm_ into Ellie ([demo](https://ellie-app.com/4mrN7hymNKja1)) |  ✅ No error.
 
 ### With `elm-style-animation`
 
@@ -22,12 +47,38 @@ git checkout tags/noerror
 git checkout tags/error
 ```
 
- | Scenario | Result
--|---------|--------
-1| `elm reactor` (browse to src/Main.elm)                                                                 |  ✅ No error.
-2| `elm make src/Main.elm` then `open index.html`                                                         |  ✅ No error.
-3| Parcel (see below)                                                        |  ❌ Error: `elm: Map.!: given key is not an element in the map`
-4| `git checkout tags/error` + paste _Main.elm_ into Ellie ([demo](https://ellie-app.com/4mrN7hymNKja1))  |  ❌ Error: `Uncaught ReferenceError: Elm is not defined`
+<table>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Scenario</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td><code>elm reactor</code> (browse to src/Main.elm)</td>
+            <td>✅ No error.</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><code>elm make src/Main.elm</code> then <code>open index.html</code></td>
+            <td>✅ No error.</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Parcel (see below)</td>
+            <td>❌ Error: <code>elm: Map.!: given key is not an element in the map</code></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td><code>git checkout tags/error</code> + paste _Main.elm_ into Ellie (<a href="https://ellie-app.com/4mr58fz6dt5a1">demo</a>)</td>
+            <td>❌ Error: <code>Uncaught ReferenceError: Elm is not defined</code></td>
+        </tr>
+    </tbody>
+</table>
+
 
 ---
 
