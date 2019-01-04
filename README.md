@@ -41,7 +41,9 @@ First verify that Parcel works fine before we bring in the animation library:
 
   ** ✅ No error. **
 
-4. `git checkout tags/error`
+4. `Ctrl-C`
+5. `git checkout tags/error`
+6. `npx parcel src/index.html`
 
   ** ❌ Error: **
 
