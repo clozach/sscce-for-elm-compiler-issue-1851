@@ -1,6 +1,5 @@
 module Main exposing (main)
 
-import Animation
 import Browser
 import Browser.Navigation as Nav
 import Html exposing (..)
@@ -14,15 +13,11 @@ view _ =
     }
 
 
-type Msg
-    = Animate Animation.Msg
-
-
-main : Program () () Msg
+main : Program () () ()
 main =
     Browser.document
         { init = \_ -> ( (), Cmd.none )
-        , subscriptions = \_ -> Animation.subscription Animate []
+        , subscriptions = \_ -> Sub.none
         , update = \_ _ -> ( (), Cmd.none )
         , view = view
         }
